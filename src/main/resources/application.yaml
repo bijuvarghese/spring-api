@@ -1,9 +1,14 @@
 spring:
   application:
     name: store
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     url: jdbc:mysql://localhost:3306/store_api?createDatabaseIfNotExist=true
     username: root
     password: admin1234
   jpa:
     show-sql: true
+  jwt:
+    secret: ${JWT_SECRET}

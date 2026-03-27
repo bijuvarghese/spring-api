@@ -1,12 +1,11 @@
 package com.codewithmosh.store.mappers;
 
-import com.codewithmosh.store.dtos.AddItemToCartRequest;
 import com.codewithmosh.store.dtos.CartDto;
 import com.codewithmosh.store.dtos.CartItemDto;
 import com.codewithmosh.store.entities.Cart;
 import com.codewithmosh.store.entities.CartItem;
-import org.mapstruct.*;
-
+import org.mapstruct.Mapping;
+import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface CartMapper {
     @Mapping(target = "totalPrice", expression = "java(cart.getTotalPrice())")
