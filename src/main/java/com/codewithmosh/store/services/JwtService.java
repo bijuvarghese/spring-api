@@ -36,12 +36,12 @@ public class JwtService {
                 .compact();
     }
 
-    public boolean validateToken(String token) {
+    public boolean isValidToken(String token) {
         try {
             var claims = getClaims(token);
-            return claims.getExpiration().after(new Date());
+            return !claims.getExpiration().after(new Date());
         } catch(JwtException e) {
-            return false;
+            return true;
         }
     }
 

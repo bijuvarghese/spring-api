@@ -26,7 +26,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         authHeader = authHeader.replace("Bearer ", "");
-        if(!jwtService.validateToken(authHeader)) {
+        if(jwtService.isValidToken(authHeader)) {
             filterChain.doFilter(request, response);
             return;
         }

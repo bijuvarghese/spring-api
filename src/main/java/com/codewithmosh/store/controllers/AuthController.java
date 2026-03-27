@@ -53,7 +53,7 @@ public class AuthController {
 
     @PostMapping("/refresh")
     public ResponseEntity<JwtResponse> refreshToken(@CookieValue(value = "refreshToken") String refreshToken) {
-        if(!jwtService.validateToken(refreshToken)) {
+        if(jwtService.isValidToken(refreshToken)) {
             // throw new BadCredentialsException("Invalid refresh token");
             return ResponseEntity.notFound().build();
         }
