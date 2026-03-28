@@ -32,7 +32,7 @@ public class CartService {
     }
 
     public CartItemDto addItemToCart(UUID cartId, Long productId, Integer quantity) {
-        var cart = cartRepository.getCartWithItems(cartId).orElse(null);
+        var cart = cartRepository.findById(cartId).orElse(null);
         if (cart == null) {
             throw new CartNotFoundException();
         }
@@ -48,7 +48,7 @@ public class CartService {
     }
 
     public CartDto getCart(UUID cartId) {
-        var cart = cartRepository.getCartWithItems(cartId).orElse(null);
+        var cart = cartRepository.findById(cartId).orElse(null);
         if (cart == null) {
             throw new CartNotFoundException();
         }

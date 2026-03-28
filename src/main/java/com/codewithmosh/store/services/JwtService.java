@@ -9,53 +9,50 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @AllArgsConstructor
 public class JwtService {
 
-    private final JwtConfig config;
+    private final JwtConfig jwtConfig;
 
-
-    public String generateAccessToken(User user) {
-        return generateToken(user, config.getAccessTokenExpiration());
+    public Jwt generateAccessToken(User user) {
+        return generateToken(user, jwtConfig.getAccessTokenExpiration());
     }
 
-    public String generateRefreshToken(User user) {
-        return generateToken(user, config.getRefreshTokenExpiration());
+    public Jwt generateRefreshToken(User user) {
+        return generateToken(user, jwtConfig.getRefreshTokenExpiration());
     }
 
-    private String generateToken(User user, long timeToLive) {
-        return Jwts.builder()
+    private Jwt generateToken(User user, long timeToLiveInSeconds) {
+        long timeToLiveInMilliseconds = TimeUnit.SECONDS.toMillis(timeToLiveInSeconds);
+        var claims = Jwts.claims()
                 .subject(user.getId().toString())
-                .claim("email", user.getEmail())
-                .claim("name", user.getName())
+                .add("email", user.getEmail())
+                .add("role", user.getRole().toString())
+                .add("name", user.getName())
+                .expiration(new Date(System.currentTimeMillis() + timeToLiveInMilliseconds))
                 .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + timeToLive * 1000))
-                .signWith(config.getSecretKey())
-                .compact();
-    }
-
-    public boolean isValidToken(String token) {
-        try {
-            var claims = getClaims(token);
-            return !claims.getExpiration().after(new Date());
-        } catch(JwtException e) {
-            return true;
-        }
+                .build();
+        return new Jwt(claims, jwtConfig.getSecretKey());
     }
 
     private Claims getClaims(String token) {
         return Jwts.parser()
-                .verifyWith(config.getSecretKey())
+                .verifyWith(jwtConfig.getSecretKey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
     }
 
-    public Long getUserIdFromToken(String token) {
-        return Long.valueOf(getClaims(token).getSubject());
+    public Jwt parseToken(String token) {
+        try {
+            var claims = getClaims(token);
+            return new Jwt(claims, jwtConfig.getSecretKey());
+        } catch (JwtException e) {
+            return null;
+        }
     }
-    
-    
+
 }
