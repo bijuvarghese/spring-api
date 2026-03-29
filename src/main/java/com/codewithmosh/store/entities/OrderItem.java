@@ -2,7 +2,9 @@ package com.codewithmosh.store.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -12,6 +14,7 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Table(name = "order_items")
+@NoArgsConstructor
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,5 +38,11 @@ public class OrderItem {
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 
-
+    public OrderItem(Order order, Product product, BigDecimal unitPrice, Integer quantity, BigDecimal totalPrice) {
+        this.order = order;
+        this.product = product;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+    }
 }

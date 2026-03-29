@@ -1,5 +1,6 @@
 package com.codewithmosh.store.entities;
 
+import com.codewithmosh.store.exceptions.ProductNotFoundException;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -67,5 +68,8 @@ public class Cart {
 
     public void removeAll() {
         items.clear();
+    }
+    public boolean isEmpty() {
+        return items.isEmpty();
     }
 }

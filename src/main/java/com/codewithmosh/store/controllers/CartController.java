@@ -92,8 +92,8 @@ public class CartController {
         return  ResponseEntity
                 .noContent()
                 .build();
-
     }
+
     @ExceptionHandler(CartNotFoundException.class)
     public ResponseEntity<ErrorDto> handleCartNotFoundException() {
         return ResponseEntity
