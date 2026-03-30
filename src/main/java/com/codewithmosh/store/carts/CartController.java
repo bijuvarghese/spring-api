@@ -1,6 +1,6 @@
 package com.codewithmosh.store.carts;
 
-import com.codewithmosh.store.dtos.*;
+import com.codewithmosh.store.common.ErrorDto;
 import com.codewithmosh.store.products.ProductNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
