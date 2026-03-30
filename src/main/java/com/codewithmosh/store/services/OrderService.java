@@ -5,6 +5,7 @@ import com.codewithmosh.store.exceptions.OrderNotFoundException;
 import com.codewithmosh.store.mappers.OrderMapper;
 import com.codewithmosh.store.repositories.OrderRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

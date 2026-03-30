@@ -1,9 +1,8 @@
-package com.codewithmosh.store.dtos;
+package com.codewithmosh.store.payments;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.lang.annotation.Native;
 import java.util.UUID;
 
 @Data
