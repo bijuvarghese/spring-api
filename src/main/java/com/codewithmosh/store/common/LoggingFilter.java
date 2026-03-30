@@ -1,4 +1,4 @@
-package com.codewithmosh.store.auth;
+package com.codewithmosh.store.common;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,7 +9,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 @Component
-public class LoginFilters extends OncePerRequestFilter {
+public class LoggingFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         System.out.println("Request URI: " + request.getRequestURI());
