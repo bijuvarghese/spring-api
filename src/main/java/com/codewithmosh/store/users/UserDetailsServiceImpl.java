@@ -25,4 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 Collections.emptyList()
         );
     }
+<<<<<<<< HEAD:src/main/java/com/codewithmosh/store/users/UserDetailsServiceImpl.java
 }
+========
+
+
+}
+>>>>>>>> 157218f5eb2ea57d35f1ab4797b63e1ca3f15db0:src/main/java/com/codewithmosh/store/users/UserService.java
