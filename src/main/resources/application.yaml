@@ -12,3 +12,10 @@ spring:
     show-sql: true
   jwt:
     secret: ${JWT_SECRET}
+    accessTokenExpiration: 8000
+    refreshTokenExpiration: 604800
+
+stripe:
+  secretKey: ${STRIPE_SECRET_KEY}
+  wehbookSecretKey: ${STRIPE_WEBHOOK_SECRET_KEY}
+websiteUrl: http://localhost:3000
